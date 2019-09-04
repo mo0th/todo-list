@@ -9,8 +9,9 @@ require('dotenv').config();
 // Initialise express app
 const app = express();
 
-// Use JSON bodyparser
+//Use CORS middleware
 app.use(cors());
+// Use JSON bodyparser
 app.use(express.json());
 
 // Use morgan middleware
@@ -27,6 +28,7 @@ mongoose
 
 // Use api routes
 app.use('/api/todos', require('./routes/api/todos'));
+
 // Serve react build when in produciton mode
 if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static(path.join(__dirname, 'client', 'build')));
@@ -34,6 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // Get port from environment
 const port = process.env.PORT || 5000;
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
