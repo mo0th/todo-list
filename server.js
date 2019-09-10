@@ -21,6 +21,8 @@ if (process.env.NODE_ENV !== 'production') {
 // Connect to mongodb
 const { MONGO_URI } = process.env;
 
+console.log(process.env);
+
 mongoose
     .connect(MONGO_URI, { useNewUrlParser: true, useFindAndModify: false })
     .then(() => console.log('Connected to mongodb'))
