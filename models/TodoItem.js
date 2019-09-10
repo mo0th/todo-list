@@ -13,8 +13,7 @@ const TodoItemSchema = new Schema({
     created_at: {
         type: Date,
         default: Date.now
-    },
-    tags: [String]
+    }
 });
 
 module.exports = TodoItem = mongoose.model('todoItem', TodoItemSchema);

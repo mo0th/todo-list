@@ -19,11 +19,10 @@ router.get('/', (req, res) => {
 // @desc    Create a todo
 // @access  Public
 router.post('/create', (req, res) => {
-    const { name, tags } = req.body;
+    const { name } = req.body;
 
     const newItem = new TodoItem({
-        name,
-        tags
+        name
     });
 
     newItem
@@ -68,13 +67,7 @@ router.delete('/delete/:id', (req, res) => {
 // @access  Public
 router.post('/update/:id', (req, res) => {
     const { id } = req.params;
-    const { name, tags: _tags, complete } = req.body;
-    let tags;
-
-    // Trim and convert tags to lowercase to simplyify filtering by tag
-    if (_tags) {
-        tags = _tags.map(tag => tag.trim().toLowerCase());
-    }
+    const { name, complete } = req.body;
 
     TodoItem.findById(id)
         .then(item => {
@@ -85,8 +78,8 @@ router.post('/update/:id', (req, res) => {
                 });
             else {
                 item.name = name ? name : item.name;
-                item.tags = tags ? tags : item.tags;
-                item.complete = complete ? complete : item.complete;
+                item.complete =
+                    typeof complete === 'boolean' ? complete : item.complete;
 
                 item.save()
                     .then(newItem => res.json(newItem))
