@@ -5,7 +5,7 @@ export const TodoContext = createContext();
 
 export const TodoContextProvider = ({ children }) => {
     const [todos, setTodos] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setLoading(true);
