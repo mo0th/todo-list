@@ -38,6 +38,7 @@ body {
         color: $primaryColor;
         font-size: 1.5rem;
         letter-spacing: 2px;
+        pointer-events: none;
     }
 
     &__icon {
@@ -191,4 +192,8 @@ body {
     padding: 0.5em;
     transition: background 300ms;
     cursor: pointer;
+}
+
+.loader {
+    pointer-events: none;
 }

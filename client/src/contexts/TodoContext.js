@@ -5,9 +5,14 @@ export const TodoContext = createContext();
 
 export const TodoContextProvider = ({ children }) => {
     const [todos, setTodos] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        axios.get('/api/todos').then(res => setTodos(res.data));
+        setLoading(true);
+        axios.get('/api/todos').then(res => {
+            setTodos(res.data)
+            setLoading(false);
+        });
     }, []);
 
     // useEffect(() => {
@@ -74,7 +79,8 @@ export const TodoContextProvider = ({ children }) => {
                 markTodoComplete,
                 markAllTodosComplete,
                 deleteTodo,
-                deleteAllTodos
+                deleteAllTodos,
+                loading
             }}
         >
             {children}
